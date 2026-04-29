@@ -36,8 +36,8 @@ console.log(newArr);
 
 //concate
 
-let a = [1,2];
-let b = [3,4];
+let a = [1,2,6];
+let b = [3,4,5];
 
 let c = a.concat(b);
 
