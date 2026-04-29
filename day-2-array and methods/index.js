@@ -65,7 +65,7 @@ arr.forEach(x => console.log(x));
 
 //find
 
- let arr6 = [1,2,3,4];
+ let arr6 = [1,2,3,4,5 ,6];
 
 arr6.find(x => x >= 1);
 console.log(arr6.find(x => x > 3));
