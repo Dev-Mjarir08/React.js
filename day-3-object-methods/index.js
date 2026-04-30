@@ -32,3 +32,9 @@ let obj3 =JSON.parse(obj4)
 obj3.address.city="Vyara"
 console.log(obj3);
 
+let user = {name:"Jarir", age:20};
+
+Object.keys(user); 
+console.log(Object.keys(user));//keys()
+console.log(Object.values(user));//values
+console.log(Object.entries(user));//entries
