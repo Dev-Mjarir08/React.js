@@ -3,7 +3,7 @@ import Country from './components/props/Country'
 const App = () => {
   return (
     <>
-    <Country country="India" city="Surat" state="Gujarat"/>
+    <Country country="India" city="Surat" state="Delhi"/>
     </>
   )
 }
