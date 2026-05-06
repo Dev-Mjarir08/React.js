@@ -4,14 +4,14 @@ const Children = () => {
     useEffect(()=>{
         console.log("Componenet Mount");
         return()=>{
-            alert('Nice To Meet You')
-            console.log('Component Unmount..');
+            alert('Nice To Meet You..!')
+            console.log('Component Unmount...');
             
         }
     },[])
   return (
     <>
-      <h2>hello from children</h2>
+      <h2>Hello from children</h2>
     </>
   )
 }
