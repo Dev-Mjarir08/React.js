@@ -17,7 +17,8 @@ const Counter = () => {
 
     return (
         <>
-            <h1>hello</h1>
+            <h1>Hello Nice TO Meet You...!</h1>
+            <p>I'm React.js Developer</p>
         </>
     )
 }
