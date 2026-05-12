@@ -1,4 +1,5 @@
 import { Component } from "react";
+import Child from "./components/child";
 
 class App extends Component {
   constructor(props) {
@@ -22,6 +23,7 @@ class App extends Component {
         <h2>helloo react developers</h2>
         <h4>count: {this.state.count}</h4>
         <button type="button" onClick={this.handelCounter}>+</button>
+        <Child name="Jarir"/>
       </>
     )
   }
