@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import './App.css'
 
 const App = () => {
 
@@ -6,10 +7,10 @@ const App = () => {
   const [list, setList] = useState([])
   const [editID, setEditId] = useState(null)
 
-
   const handelSubmit = (e) => {
 
     e.preventDefault()
+
     if (editID) {
 
       const data = list.map((value) => {
@@ -17,6 +18,7 @@ const App = () => {
         if (value.id === editID) {
           return { ...value, text: todo }
         }
+
         return value
       })
 
@@ -26,6 +28,7 @@ const App = () => {
       setTodo("")
 
     } else {
+
       const newList = [...list, { id: Date.now(), text: todo }]
 
       setList(newList)
@@ -33,17 +36,19 @@ const App = () => {
       localStorage.setItem('todolist', JSON.stringify(newList))
       setTodo("")
     }
-
   }
+
   const handelDelete = (id) => {
 
     let newList = list.filter((value) => {
       return value.id !== id
     })
+
     localStorage.setItem('todolist', JSON.stringify(newList))
 
     setList(newList)
   }
+
   const handelEdit = (id) => {
 
     let data = list.find((value) => {
@@ -53,6 +58,7 @@ const App = () => {
     setTodo(data.text)
     setEditId(id)
   }
+
   useEffect(() => {
 
     const oldData = JSON.parse(localStorage.getItem('todolist'))
@@ -62,88 +68,99 @@ const App = () => {
     }
 
   }, [])
+
   return (
-    <>
-      <form onSubmit={handelSubmit}>
+    <div className='container'>
 
-        <div>
-          <label htmlFor="text">Task</label>
+      <div className='todo-box'>
 
-          <input
-            type="text"
-            id='text'
-            value={todo}
-            onChange={(e) => setTodo(e.target.value)}
-          />
-        </div>
+        <h1 className='title'>Todo App</h1>
 
-        <br />
+        <form onSubmit={handelSubmit} className='todo-form'>
 
-        <div>
-          <button type='submit'>
+          <div className='input-group'>
+
+            <label htmlFor="text" className='label'>
+              Task
+            </label>
+
+            <input
+              type="text"
+              id='text'
+              className='input'
+              value={todo}
+              onChange={(e) => setTodo(e.target.value)}
+              placeholder='Enter your task'
+            />
+
+          </div>
+
+          <button type='submit' className='submit-btn'>
             {
               editID ? "Update" : "Submit"
             }
           </button>
-        </div>
 
-        <br />
+        </form>
 
-      </form>
+        <table className='todo-table'>
 
-      <table border={1} width={500}>
+          <thead>
 
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Task</th>
-            <th>Action</th>
-          </tr>
-        </thead>
+            <tr>
+              <th>#</th>
+              <th>Task</th>
+              <th>Action</th>
+            </tr>
 
-        <tbody>
+          </thead>
 
-          {
-            list.map((value, index) => {
+          <tbody>
 
-              const { id, text } = value
+            {
+              list.map((value, index) => {
 
-              return (
-                <tr key={id}>
+                const { id, text } = value
 
-                  <td>{index + 1}</td>
+                return (
+                  <tr key={id}>
 
-                  <td>{text}</td>
+                    <td>{index + 1}</td>
 
-                  <td>
+                    <td>{text}</td>
 
-                    <button
-                      type='button'
-                      onClick={() => handelDelete(id)}
-                    >
-                      Delete
-                    </button>
+                    <td>
 
-                    {" "}
+                      <button
+                        type='button'
+                        className='delete-btn'
+                        onClick={() => handelDelete(id)}
+                      >
+                        Delete
+                      </button>
 
-                    <button
-                      type='button'
-                      onClick={() => handelEdit(id)}
-                    >
-                      Edit
-                    </button>
+                      <button
+                        type='button'
+                        className='edit-btn'
+                        onClick={() => handelEdit(id)}
+                      >
+                        Edit
+                      </button>
 
-                  </td>
+                    </td>
 
-                </tr>
-              )
-            })
-          }
+                  </tr>
+                )
+              })
+            }
 
-        </tbody>
+          </tbody>
 
-      </table>
-    </>
+        </table>
+
+      </div>
+
+    </div>
   )
 }
 
