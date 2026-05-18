@@ -1,8 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './App.css'
 import { FaStar } from "react-icons/fa";
 
 const App = () => {
+  const [feedback, setFeedback] = useState({})
+  const [star, setStar] = useState(0)
+  const [temp, setTemp] = useState(0)
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFeedback({ ...feedback, [name]: value })
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(feedback);
+
+  }
+  const handleMouseEnter = (star) => {
+    handleStar(0)
+    setTemp(star)
+  }
+
+  const handleStar = (star) => {
+    setStar(star)
+    setFeedback({ ...feedback, star })
+  }
+
+  const handleMouseLeave = () => {
+    setTemp(0)
+  }
   return (
     <>
       <div className="container">
@@ -12,7 +38,7 @@ const App = () => {
           <div className='header'>
             <h2>Testimonials</h2>
 
-            <form className='testimonial-form'>
+            <form className='testimonial-form' onSubmit={handleSubmit}>
 
               {/* Email */}
               <div className='form-group'>
@@ -24,7 +50,9 @@ const App = () => {
                   className='form-input'
                   type="text"
                   id='email'
+                  name='email'
                   placeholder='Enter your email'
+                  onChange={handleChange}
                 />
               </div>
 
@@ -37,17 +65,16 @@ const App = () => {
 
                 <div className='rating'>
 
-                  {
-                    [...Array(5)].map((_, index) => {
-                      return (
-                        <FaStar
-                          className='star'
-                          color='gray'
-                          key={index}
-                        />
-                      )
-                    })
-                  }
+                  {[...Array(5)].map((_, index) => (
+                    <FaStar
+                      key={index}
+                      className="star"
+                      color={temp > index || star > index ? "gold" : "gray"}
+                      onClick={() => handleStar(index + 1)}
+                      onMouseEnter={() => setTemp(index + 1)}
+                      onMouseLeave={handleMouseLeave}
+                    />
+                  ))}
 
                 </div>
 
@@ -63,6 +90,8 @@ const App = () => {
                 <textarea
                   className='form-textarea'
                   id='feedback'
+                  name='text'
+                  onChange={handleChange}
                   placeholder='Write your feedback...'
                 ></textarea>
 
@@ -83,7 +112,33 @@ const App = () => {
           </div>
 
         </div>
+        <table>
+          <thead>
+            <th>#</th>
+            <th>email</th>
+            <th>star</th>
+            <th>Review</th>
+          </thead>
+          <tbody>
+            {
+              feedback.map((value, index) => {
 
+                const { email, star } = feedback
+
+                return (
+                  <tr key={id}>
+
+                    <td>{index + 1}</td>
+                    <td>{email}</td>
+
+                    <td>{text}</td>
+
+                  </tr>
+                )
+              })
+            }
+          </tbody>
+        </table>
       </div>
     </>
   )
