@@ -91,8 +91,8 @@ const App = () => {
                     <td>{email}</td>
                     <td>{password}</td>
                     <td>
-                      <button type='button' onClick={() => handleDelete(item.id)}>Delete</button>{'  '}
-                      <button>Edit</button>
+                      <button type='button' onClick={() => handleDelete(item.id)}>Delete</button>{' '}
+                      <button type='button' onClick={() => handleEdit(item.id)}>Edit</button>
                     </td>
                   </tr>
                 </>
