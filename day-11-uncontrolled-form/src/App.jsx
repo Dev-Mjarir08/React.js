@@ -33,6 +33,9 @@ const App = () => {
     let newlist = list.filter((item) => item.id != id)
     setList(newlist)
   }
+  const handleEdit =(id) =>{
+    
+  }
   return (
     <>
       <h2>Register</h2>
