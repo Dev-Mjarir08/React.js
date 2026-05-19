@@ -33,9 +33,7 @@ const App = () => {
     let newlist = list.filter((item) => item.id != id)
     setList(newlist)
   }
-  const handleEdit =(id) =>{
-    
-  }
+
   return (
     <>
       <h2>Register</h2>
@@ -95,7 +93,6 @@ const App = () => {
                     <td>{password}</td>
                     <td>
                       <button type='button' onClick={() => handleDelete(item.id)}>Delete</button>{' '}
-                      <button type='button' onClick={() => handleEdit(item.id)}>Edit</button>
                     </td>
                   </tr>
                 </>
