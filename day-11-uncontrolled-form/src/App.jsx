@@ -8,17 +8,27 @@ const App = () => {
   const password = useRef()
 
   const [list, setList] = useState([])
+  const [editId, setEditId] = useState(null)
   const handleSubmit = (e) => {
     e.preventDefault()
     let obj = {
-      id: Date.now(),
+       id: editId || Date.now(),
       fname: fname.current.value,
       lname: lname.current.value,
       email: email.current.value,
       password: password.current.value
     }
-    const newList = ([...list, obj])
-    setList(newList)
+    if (editId) {
+      let updated = list.map((item) =>
+        item.id === editId ? obj : item
+      )
+
+      setList(updated)
+      setEditId(null)
+
+    } else {
+      setList([...list, obj])
+    }
     fname.current.value = ''
 
     lname.current.value = ''
@@ -32,6 +42,19 @@ const App = () => {
   const handleDelete = (id) => {
     let newlist = list.filter((item) => item.id != id)
     setList(newlist)
+  }
+  const handleEdit = (id) => {
+
+    let data = list.find((value) => {
+      return value.id === id
+    })
+
+    fname.current.value = data.fname
+    lname.current.value = data.lname
+    email.current.value = data.email
+    password.current.value = data.password
+
+    setEditId(id)
   }
 
   return (
@@ -93,6 +116,7 @@ const App = () => {
                     <td>{password}</td>
                     <td>
                       <button type='button' onClick={() => handleDelete(item.id)}>Delete</button>{' '}
+                      <button type='button' onClick={() => handleEdit(item.id)}>Edit</button>{' '}
                     </td>
                   </tr>
                 </>
