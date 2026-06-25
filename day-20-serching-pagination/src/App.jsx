@@ -49,6 +49,8 @@ const App = () => {
       });
 
       setList(newList);
+      setProduct({})
+      navigator('/view-products')
       toast.success("data updated")
       
 
